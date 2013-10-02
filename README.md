@@ -154,12 +154,15 @@ Or you can just check the config value directly (just make sure you're not chang
 You can then use this in your controller (or elsewhere) for validation and authentication:
 
 	:::php
+	$loginfield = \Hampel\Sentry\Auth\SentryUser::getLoginAttributeName();
+	$passwordfield = 'password';
+
 	$credentials = array(
 		$loginfield => Input::get('email'),
 		$passwordfield => Input::get('password')
 	);
 
-	if (Auth::attempt($userdata))
+	if (Auth::attempt($credentials))
 	{
 		// successfully logged in
 	}
