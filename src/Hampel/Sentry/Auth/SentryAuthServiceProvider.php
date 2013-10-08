@@ -29,7 +29,7 @@ class SentryAuthServiceProvider extends ServiceProvider {
 		{
 			$provider = new EloquentUserProvider($app['sentry-hash'], Config::get('auth.model'));
 
-			return new Guard($provider, $app['session']);
+			return new Guard($provider, $app['session.store']);
 		});
 	}
 
