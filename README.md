@@ -29,7 +29,7 @@ Require the package via Composer in your `composer.json`
     {
         "require": {
         	"cartalyst/sentry": "2.0.*",
-            "hampel/sentry-auth-laravel": "1.0.*"
+            "hampel/sentry-auth-laravel": "1.1.*"
         }
     }
 
