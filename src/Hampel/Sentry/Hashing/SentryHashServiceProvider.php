@@ -18,9 +18,11 @@ class SentryHashServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app['sentry-hash'] = $this->app->share(function()
+		$app = $this->app;
+
+		$this->app['sentry-hash'] = $this->app->share(function($app)
 		{
-			return new SentryHasher($this->app['sentry.hasher']);
+			return new SentryHasher($app['sentry.hasher']);
 		});
 	}
 

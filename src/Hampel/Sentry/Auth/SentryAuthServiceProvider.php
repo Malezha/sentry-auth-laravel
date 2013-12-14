@@ -25,9 +25,9 @@ class SentryAuthServiceProvider extends ServiceProvider {
 
 		$app = $this->app;
 
-		\Auth::extend('sentry', function() use ($app)
+		$this->app['auth']->extend('sentry', function($app)
 		{
-			$provider = new EloquentUserProvider($app['sentry-hash'], Config::get('auth.model'));
+			$provider = new EloquentUserProvider($app['sentry-hash'], $app['config']->get('auth.model'));
 
 			return new Guard($provider, $app['session.store']);
 		});
