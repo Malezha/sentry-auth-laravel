@@ -1,6 +1,13 @@
 CHANGELOG
 =========
 
+1.1.1 (2013-12-14)
+------------------
+
+* removed orchestral/testbench from require-dev and removed ServiceProviderTest which used it due to a conflict in
+  required classes
+* fixed some issues with the service providers
+
 1.1.0 (2013-12-13)
 ------------------
 
