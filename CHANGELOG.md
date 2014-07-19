@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+1.1.2 (2014-07-19)
+------------------
+
+* updated framework requirement to 4.2.*
+* updated Sentry requirement to 2.1.*
+
 1.1.1 (2013-12-14)
 ------------------
 

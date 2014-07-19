@@ -1,4 +1,4 @@
-<?php namespace Hampel\Sentry\Auth;
+<?php namespace Malezha\Sentry\Auth;
 
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;

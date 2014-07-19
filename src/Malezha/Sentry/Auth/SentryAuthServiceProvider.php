@@ -1,4 +1,4 @@
-<?php namespace Hampel\Sentry\Auth;
+<?php namespace Malezha\Sentry\Auth;
 
 use Config;
 use Illuminate\Support\ServiceProvider;
@@ -21,7 +21,7 @@ class SentryAuthServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('hampel/sentry-auth-laravel', 'sentry-auth-laravel', __DIR__ . '/../../..');
+		$this->package('malezha/sentry-auth-laravel', 'sentry-auth-laravel', __DIR__ . '/../../..');
 
 		$app = $this->app;
 

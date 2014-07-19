@@ -16,7 +16,8 @@ This package allows you to do exactly that - install Sentry, install this driver
  Ideally, Cartalyst would provide this wrapper functionality as part of their own Sentry package, but until then, hopefully this package will
  be useful to some people.
 
-By [Simon Hampel](http://hampelgroup.com/).
+By [Simon Hampel](http://hampelgroup.com/)
+and Oleg Isaev
 
 Installation
 ------------
@@ -28,8 +29,8 @@ Require the package via Composer in your `composer.json`
 	:::json
     {
         "require": {
-        	"cartalyst/sentry": "2.0.*",
-            "hampel/sentry-auth-laravel": "1.1.*"
+        	"cartalyst/sentry": "2.1.*",
+            "malezha/sentry-auth-laravel": "1.1.*"
         }
     }
 
@@ -46,8 +47,8 @@ Open your Laravel config file `app/config/app.php` and add the two service provi
         ...
 
 		'Cartalyst\Sentry\SentryServiceProvider',
-		'Hampel\Sentry\Auth\SentryAuthServiceProvider',
-		'Hampel\Sentry\Hashing\SentryHashServiceProvider',
+		'Malezha\Sentry\Auth\SentryAuthServiceProvider',
+		'Malezha\Sentry\Hashing\SentryHashServiceProvider',
 
     ),
 
@@ -80,10 +81,10 @@ Open your Laravel config file `app/config/auth.php` and set the driver to `sentr
 	:::php
 	'driver' => 'sentry',
 
-Also in the file `app/config/auth.php`, set the model to `Hampel\Sentry\Auth\SentryUser`:
+Also in the file `app/config/auth.php`, set the model to `Malezha\Sentry\Auth\SentryUser`:
 
 	:::php
-	'model' => 'Hampel\Sentry\Auth\SentryUser',
+	'model' => 'Malezha\Sentry\Auth\SentryUser',
 
 In your Sentry config file `app/config/packages/cartalyst/sentry/config.php`, leave the driver as `eloquent`:
 
@@ -93,15 +94,15 @@ In your Sentry config file `app/config/packages/cartalyst/sentry/config.php`, le
 It doesn't matter which hasher you choose to use fro Sentry, our driver will simply use the same hasher in place of the built in hasher from
 Laravel.
 
-Still in the Sentry config file, change the users model to `Hampel\Sentry\Auth\SentryUser`:
+Still in the Sentry config file, change the users model to `Malezha\Sentry\Auth\SentryUser`:
 
 	:::php
 	'users' => array(
-		'model' => 'Hampel\Sentry\Auth\SentryUser',
+		'model' => 'Malezha\Sentry\Auth\SentryUser',
 	),
 
 Important - if you choose to extend the user model with your own additional functionality, or to change default connection names or table names,
-ensure you extend `Hampel\Sentry\Auth\SentryUser` rather than `Cartalyst\Sentry\Users\Eloquent\User`. Our SentryUser model extends Sentry's
+ensure you extend `Malezha\Sentry\Auth\SentryUser` rather than `Cartalyst\Sentry\Users\Eloquent\User`. Our SentryUser model extends Sentry's
  User model, but also implements some of the additional interfaces required by the Laravel Auth libraries.
 
  If you have extended our SentryUser model, you should specify the name of your own model in both the Laravel `auth.php` config file and in the
@@ -110,7 +111,7 @@ ensure you extend `Hampel\Sentry\Auth\SentryUser` rather than `Cartalyst\Sentry\
 For example, create a new model in `app/models/MyUser.php`:
 
 	:::php
-	use Hampel\Sentry\Auth\SentryUser;
+	use Malezha\Sentry\Auth\SentryUser;
 
 	class MyUser extends SentryUser
 	{
@@ -136,14 +137,14 @@ Usage
 
 Implement user authentication for your Laravel application as normal, following the instructions in [http://laravel.com/docs/security](http://laravel.com/docs/security).
 
-Either use the `Hampel\Sentry\Auth\SentryUser` model provided to replace the user model provided by Sentry, or implement your own model
+Either use the `Malezha\Sentry\Auth\SentryUser` model provided to replace the user model provided by Sentry, or implement your own model
 extending the model we have supplied.
 
 Given that the field used as the username in Sentry can be configured, when sending user data to `Auth::attempt`, you should use the
 configured value rather than hard-coding the value in your code. There are two ways of retrieving this value:
 
 	:::php
-	$loginfield = \Hampel\Sentry\Auth\SentryUser::getLoginAttributeName();
+	$loginfield = \Malezha\Sentry\Auth\SentryUser::getLoginAttributeName();
 
 Or you can just check the config value directly (just make sure you're not changing the login attribute name yourself dynamically at runtime!):
 
@@ -154,7 +155,7 @@ Or you can just check the config value directly (just make sure you're not chang
 You can then use this in your controller (or elsewhere) for validation and authentication:
 
 	:::php
-	$loginfield = \Hampel\Sentry\Auth\SentryUser::getLoginAttributeName();
+	$loginfield = \Malezha\Sentry\Auth\SentryUser::getLoginAttributeName();
 	$passwordfield = 'password';
 
 	$credentials = array(

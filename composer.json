@@ -1,17 +1,22 @@
 {
-    "name": "hampel/sentry-auth-laravel",
+    "name": "malezha/sentry-auth-laravel",
     "description": "Sentry Auth Driver for Laravel",
-	"homepage" : "https://bitbucket.org/hampel/sentry-auth-driver-for-laravel",
+	"homepage" : "https://github.com/Malezha/sentry-auth-laravel",
 	"authors": [{
 		"name": "Simon Hampel",
 		"email": "simon@hampelgroup.com",
 		"homepage": "http://hampelgroup.com/",
 		"role": "Developer"
+	},
+	{
+		"name": "Oleg Isaev",
+		"email": "malezha@e-mail.ua",
+		"role": "Developer"
 	}],
 	"support": {
-		"email": "support@hampelgroup.com",
-		"issues": "https://bitbucket.org/hampel/sentry-auth-driver-for-laravel/issues",
-		"source": "https://bitbucket.org/hampel/sentry-auth-driver-for-laravel/src"
+		"email": "malezha@e-mail.ua",
+		"issues": "https://github.com/Malezha/sentry-auth-laravel/issues",
+		"source": "https://github.com/Malezha/sentry-auth-laravel"
 	},
 	"keywords" : [
 		"laravel",
@@ -23,9 +28,9 @@
 		"MIT"
 	],
     "require": {
-        "php": ">=5.3.0",
-        "illuminate/support": "4.1.*",
-		"cartalyst/sentry": "2.0.*"
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*",
+		"cartalyst/sentry": "2.1.*"
     },
 	"require-dev" : {
 		"phpunit/phpunit" : "3.7.*",
@@ -33,7 +38,7 @@
 	},
     "autoload": {
         "psr-0": {
-            "Hampel\\Sentry": "src/"
+            "Malezha\\Sentry": "src/"
         }
     },
     "minimum-stability": "dev"

@@ -1,4 +1,4 @@
-<?php namespace Hampel\Sentry\Hashing;
+<?php namespace Malezha\Sentry\Hashing;
 
 use Illuminate\Support\ServiceProvider;
 

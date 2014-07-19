@@ -1,4 +1,4 @@
-<?php namespace Hampel\Sentry\Hashing;
+<?php namespace Malezha\Sentry\Hashing;
 
 use Illuminate\Hashing\HasherInterface;
 use Cartalyst\Sentry\Hashing\HasherInterface as SentryHasherInterface;
