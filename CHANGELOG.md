@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+1.2.0 (2014-07-20)
+------------------
+* package updated for laravel 4.2
+* phpunit auth test added
+
 1.1.2 (2014-07-19)
 ------------------
 

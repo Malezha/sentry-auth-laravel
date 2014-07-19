@@ -1,5 +1,12 @@
-Sentry Auth Driver for Laravel
-==============================
+##Sentry Auth Driver for Laravel
+
+[![Build Status](https://travis-ci.org/Malezha/sentry-auth-laravel.svg)](https://travis-ci.org/malezha/sentry-auth-laravel)
+[![Coverage Status](https://coveralls.io/repos/Malezha/sentry-auth-laravel/badge.png)](https://coveralls.io/r/Malezha/sentry-auth-laravel)
+[![Latest Stable Version](https://poser.pugx.org/malezha/sentry-auth-laravel/v/stable.svg)](https://packagist.org/packages/malezha/sentry-auth-laravel) 
+[![Total Downloads](https://poser.pugx.org/malezha/sentry-auth-laravel/downloads.svg)](https://packagist.org/packages/malezha/sentry-auth-laravel) 
+[![Latest Unstable Version](https://poser.pugx.org/malezha/sentry-auth-laravel/v/unstable.svg)](https://packagist.org/packages/malezha/sentry-auth-laravel) 
+[![License](https://poser.pugx.org/malezha/sentry-auth-laravel/license.svg)](https://packagist.org/packages/malezha/sentry-auth-laravel)
+
 
 Allows you to use built-in Laravel Auth routines with Cartalyst Sentry.
 
@@ -17,40 +24,41 @@ This package allows you to do exactly that - install Sentry, install this driver
  be useful to some people.
 
 By [Simon Hampel](http://hampelgroup.com/)
-and Oleg Isaev
+and [Oleg Isaev](https://github.com/Malezha).
 
-Installation
-------------
+
+##Installation
 
 The recommended way of installing is through [Composer](http://getcomposer.org):
 
 Require the package via Composer in your `composer.json`
 
-	:::json
-    {
-        "require": {
-        	"cartalyst/sentry": "2.1.*",
-            "malezha/sentry-auth-laravel": "1.1.*"
-        }
-    }
+```json
+"require": {
+	"cartalyst/sentry": "2.1.*",
+	"malezha/sentry-auth-laravel": "dev-master"
+}
+```
 
 Run Composer to update the new requirement.
 
-	:::bash
-    $ composer update
+```shell
+$ composer update
+$ php artisan migrate --package=cartalyst/sentry
+$ php artisan migrate --package=malezha/sentry-auth-laravel
+```
 
 Open your Laravel config file `app/config/app.php` and add the two service providers to the providers array:
 
-	:::php
-    'providers' => array(
+```php
+'providers' => array(
+	...
+	'Cartalyst\Sentry\SentryServiceProvider',
+	'Malezha\Sentry\Auth\SentryAuthServiceProvider',
+	'Malezha\Sentry\Hashing\SentryHashServiceProvider',
 
-        ...
-
-		'Cartalyst\Sentry\SentryServiceProvider',
-		'Malezha\Sentry\Auth\SentryAuthServiceProvider',
-		'Malezha\Sentry\Hashing\SentryHashServiceProvider',
-
-    ),
+),
+```
 
 The SentryAuthServiceProvider is where the Auth service is extended with a new "sentry" user provider.
 
@@ -61,118 +69,104 @@ The package also supplies an Eloquent-based User model called SentryUser, which 
 
 Make sure you've added the Sentry class alias to `app/config/app.php`:
 
-	:::php
-	'aliases' => array(
-
-		...
-
-		'Sentry' => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
-	),
+```php
+'aliases' => array(
+	...
+	'Sentry' 		  => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+	'SentryUser'	  => 'Malezha\Sentry\Auth\SentryUser'
+),
+```
 
 If you haven't already done so, publish your Sentry config files:
 
-	:::bash
-	$ php artisan config:publish cartalyst/sentry
+```shell
+$ php artisan config:publish cartalyst/sentry
+```
 
 ... you should find the config files in `app/config/packages/cartalyst/sentry`
 
 Open your Laravel config file `app/config/auth.php` and set the driver to `sentry`:
 
-	:::php
-	'driver' => 'sentry',
-
-Also in the file `app/config/auth.php`, set the model to `Malezha\Sentry\Auth\SentryUser`:
-
-	:::php
-	'model' => 'Malezha\Sentry\Auth\SentryUser',
-
-In your Sentry config file `app/config/packages/cartalyst/sentry/config.php`, leave the driver as `eloquent`:
-
-	:::php
-	'driver' => 'eloquent',
+```php
+'driver' => 'sentry',
+```
 
 It doesn't matter which hasher you choose to use fro Sentry, our driver will simply use the same hasher in place of the built in hasher from
 Laravel.
 
-Still in the Sentry config file, change the users model to `Malezha\Sentry\Auth\SentryUser`:
-
-	:::php
-	'users' => array(
-		'model' => 'Malezha\Sentry\Auth\SentryUser',
-	),
-
-Important - if you choose to extend the user model with your own additional functionality, or to change default connection names or table names,
-ensure you extend `Malezha\Sentry\Auth\SentryUser` rather than `Cartalyst\Sentry\Users\Eloquent\User`. Our SentryUser model extends Sentry's
- User model, but also implements some of the additional interfaces required by the Laravel Auth libraries.
-
- If you have extended our SentryUser model, you should specify the name of your own model in both the Laravel `auth.php` config file and in the
+Our SentryUser model extends Sentry's User model, but also implements some of the additional interfaces required by the Laravel Auth libraries.
+If you have extended our SentryUser model, you should specify the name of your own model in both the Laravel `auth.php` config file and in the
  Sentry `config.php` file.
 
-For example, create a new model in `app/models/MyUser.php`:
+For example, create a new model in `app/models/User.php`:
 
-	:::php
-	use Malezha\Sentry\Auth\SentryUser;
+```php
+use Malezha\Sentry\Auth\SentryUser;
 
-	class MyUser extends SentryUser
-	{
+class User extends SentryUser
+{
 
-		// add custom functions, change default database connection, etc
+	// add custom functions, change default database connection, etc
+	
+}
+```
 
-	}
+You would then change `app/config/auth.php`, set the model to `User`:
 
-You would then change `app/config/auth.php`, set the model to `MyUser`:
+```php
+'model' => 'User',
+```
 
-	:::php
-	'model' => 'MyUser',
+Also change `app/config/packages/cartalyst/sentry/config.php` to also set the user model to `User`:
 
-Also change `app/config/packages/cartalyst/sentry/config.php` to also set the user model to `MyUser`:
+```php
+'users' => array(
+	'model' => 'User',
+),
+```
 
-	:::php
-	'users' => array(
-		'model' => 'MyUser',
-	),
 
-Usage
------
+##Usage
 
 Implement user authentication for your Laravel application as normal, following the instructions in [http://laravel.com/docs/security](http://laravel.com/docs/security).
 
-Either use the `Malezha\Sentry\Auth\SentryUser` model provided to replace the user model provided by Sentry, or implement your own model
+Either use the `SentryUser` model provided to replace the user model provided by Sentry, or implement your own model
 extending the model we have supplied.
 
 Given that the field used as the username in Sentry can be configured, when sending user data to `Auth::attempt`, you should use the
 configured value rather than hard-coding the value in your code. There are two ways of retrieving this value:
 
-	:::php
-	$loginfield = \Malezha\Sentry\Auth\SentryUser::getLoginAttributeName();
+```php
+$loginfield = SentryUser::getLoginAttributeName();
+```
 
 Or you can just check the config value directly (just make sure you're not changing the login attribute name yourself dynamically at runtime!):
 
-	:::php
-	$loginfield = Config::get('cartalyst/sentry::users.login_attribute');
-
+```php
+$loginfield = Config::get('cartalyst/sentry::users.login_attribute');
+```
 
 You can then use this in your controller (or elsewhere) for validation and authentication:
 
-	:::php
-	$loginfield = \Malezha\Sentry\Auth\SentryUser::getLoginAttributeName();
-	$passwordfield = 'password';
+```php
+$loginfield = SentryUser::getLoginAttributeName();
+$passwordfield = 'password';
 
-	$credentials = array(
-		$loginfield => Input::get('email'),
-		$passwordfield => Input::get('password')
-	);
+$credentials = array(
+	$loginfield => Input::get('email'),
+	$passwordfield => Input::get('password')
+);
 
-	if (Auth::attempt($credentials))
-	{
-		// successfully logged in
-	}
-	else
-	{
-		// authentication failed
-	}
+if (Auth::attempt($credentials))
+{
+	// successfully logged in
+}
+else
+{
+	// authentication failed
+}
+```
 
-Todo
-----
+### License
 
-* Could do with some unit tests
+The package is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)	
