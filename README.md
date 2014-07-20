@@ -28,6 +28,14 @@ This package allows you to do exactly that - install Sentry, install this driver
 By [Simon Hampel](http://hampelgroup.com/)
 and [Oleg Isaev](https://github.com/Malezha).
 
+#Versions
+
+| Driver | Laravel | Sentry |
+| :----: | :-----: | :----: |
+| 1.0.*  | 4.0.*   | 2.0.*  |
+| 1.1.*  | 4.1.*   | 2.0.*  |
+| 1.2.*  | 4.2.*   | 2.1.*  |
+
 
 ##Installation
 
@@ -38,7 +46,7 @@ Require the package via Composer in your `composer.json`
 ```json
 "require": {
 	"cartalyst/sentry": "2.1.*",
-	"malezha/sentry-auth-laravel": "dev-master"
+	"malezha/sentry-auth-laravel": "1.2.*"
 }
 ```
 

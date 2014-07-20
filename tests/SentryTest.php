@@ -2,8 +2,9 @@
 
 use Orchestra\Testbench\TestCase;
 use Carbon\Carbon;
+use Cartalyst\Sentry\Facades\Laravel\Sentry;
 
-class AuthTest extends TestCase {
+class SentryTest extends TestCase {
 
 	public function setUp() 
 	{
@@ -27,6 +28,7 @@ class AuthTest extends TestCase {
 		\DB::table('users')->insert(array(
 			'email' => $user['email'],
 			'password' => Hash::make($user['password']),
+            'activated' => 1,
 			'created_at' => $now,
 			'updated_at' => $now,
 		));
@@ -51,6 +53,8 @@ class AuthTest extends TestCase {
 		));
 
 		$app['config']->set('auth.model', '\Malezha\Sentry\Auth\SentryUser');
+
+        $app['config']->set('auth.packages.cartalyst.sentry.config.users.model', '\Malezha\Sentry\Auth\SentryUser');
 	}
 
 	protected function getPackageProviders()
@@ -70,30 +74,12 @@ class AuthTest extends TestCase {
 		);
 	}
 
-	public function testAttempt()
+	public function testSentry()
 	{
-		$user = $this->getData()['user'];
+		$credentials = $this->getData()['user'];
 
-		$this->assertTrue(\Auth::attempt($user));
-
-		$this->setExpectedException('\Cartalyst\Sentry\Users\UserNotActivatedException');
-		\Sentry::authenticate($user, false);
-	}
-
-	public function testLogout()
-	{
-		$user = $this->getData()['user'];
-
-		\Auth::attempt($user);
-		\Auth::logout();
-	}
-
-	public function testGetUser()
-	{
-		$user = $this->getData()['user'];
-
-		$this->assertTrue(\Auth::attempt($user));
-		$this->assertNotNull(\Auth::user());
+		$user = Sentry::authenticate($credentials, false);
+		$this->assertInstanceOf('Cartalyst\Sentry\Users\Eloquent\User', $user);
 	}
 
 	/**

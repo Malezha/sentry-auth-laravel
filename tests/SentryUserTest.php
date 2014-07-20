@@ -2,8 +2,9 @@
 
 use Orchestra\Testbench\TestCase;
 use Carbon\Carbon;
+use Malezha\Sentry\Auth\SentryUser;
 
-class AuthTest extends TestCase {
+class SentryUserTest extends TestCase {
 
 	public function setUp() 
 	{
@@ -70,30 +71,9 @@ class AuthTest extends TestCase {
 		);
 	}
 
-	public function testAttempt()
+	public function testSentryUser()
 	{
-		$user = $this->getData()['user'];
-
-		$this->assertTrue(\Auth::attempt($user));
-
-		$this->setExpectedException('\Cartalyst\Sentry\Users\UserNotActivatedException');
-		\Sentry::authenticate($user, false);
-	}
-
-	public function testLogout()
-	{
-		$user = $this->getData()['user'];
-
-		\Auth::attempt($user);
-		\Auth::logout();
-	}
-
-	public function testGetUser()
-	{
-		$user = $this->getData()['user'];
-
-		$this->assertTrue(\Auth::attempt($user));
-		$this->assertNotNull(\Auth::user());
+        $this->assertInstanceOf('Malezha\Sentry\Auth\SentryUser', SentryUser::find(1));;
 	}
 
 	/**

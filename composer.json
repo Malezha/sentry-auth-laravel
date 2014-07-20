@@ -14,6 +14,11 @@
 		"homepage": "https://github.com/Malezha/",
 		"role": "Developer"
 	}],
+	"support": {
+		"email": "malezha@e-mail.ua",
+		"issues": "https://github.com/Malezha/sentry-auth-laravel/issues",
+		"source": "https://github.com/Malezha/sentry-auth-laravel/tree/master"
+	},
 	"keywords" : [
 		"laravel",
 		"sentry",
