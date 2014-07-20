@@ -79,8 +79,7 @@ Make sure you've added the Sentry class alias to `app/config/app.php`:
 ```php
 'aliases' => array(
 	...
-	'Sentry' 		  => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
-	'SentryUser'	  => 'Malezha\Sentry\Auth\SentryUser'
+	'Sentry' 		  => 'Cartalyst\Sentry\Facades\Laravel\Sentry'
 ),
 ```
 
@@ -144,7 +143,7 @@ Given that the field used as the username in Sentry can be configured, when send
 configured value rather than hard-coding the value in your code. There are two ways of retrieving this value:
 
 ```php
-$loginfield = SentryUser::getLoginAttributeName();
+$loginfield = \Malezha\Sentry\Auth\SentryUser::getLoginAttributeName();
 ```
 
 Or you can just check the config value directly (just make sure you're not changing the login attribute name yourself dynamically at runtime!):
@@ -156,7 +155,7 @@ $loginfield = Config::get('cartalyst/sentry::users.login_attribute');
 You can then use this in your controller (or elsewhere) for validation and authentication:
 
 ```php
-$loginfield = SentryUser::getLoginAttributeName();
+$loginfield = \Malezha\Sentry\Auth\SentryUser::getLoginAttributeName();
 $passwordfield = 'password';
 
 $credentials = array(

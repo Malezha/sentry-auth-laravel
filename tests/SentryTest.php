@@ -9,14 +9,13 @@ class SentryTest extends BaseTest {
 	public function setUp() 
 	{
 		parent::setUp();
-		
-		$this->populateDatabase();
-
 	}
 
 	public function testSentry()
 	{
 		$credentials = $this->getData()['user'];
+
+		\Sentry::register($credentials, true);
 
 		$user = \Sentry::authenticate($credentials, false);
 		$this->assertInstanceOf('Cartalyst\Sentry\Users\Eloquent\User', $user);

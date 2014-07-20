@@ -50,7 +50,7 @@ class BaseTest extends TestCase {
 		return array(
 			'user' => [
 				'email' => 'example',
-				'password' => 'pasword',
+				'password' => 'password',
 			],
 		);
 	}
@@ -73,6 +73,7 @@ class BaseTest extends TestCase {
 			'prefix' => '',
 		));
 
+        $app['config']->set('auth.driver', 'sentry');
 		$app['config']->set('auth.model', '\Malezha\Sentry\Auth\SentryUser');
 	}
 

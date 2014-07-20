@@ -13,7 +13,8 @@ class SentryUserTest extends BaseTest {
 
 	public function testSentryUser()
 	{
-        $this->assertInstanceOf('Malezha\Sentry\Auth\SentryUser', SentryUser::find(1));;
+		$this->assertTrue(\Auth::attempt($this->getData()['user']));
+        $this->assertInstanceOf('Malezha\Sentry\Auth\SentryUser', \Auth::user());;
 	}
 
 }

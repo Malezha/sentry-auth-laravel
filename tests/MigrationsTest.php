@@ -26,7 +26,9 @@ class MigrationsTest extends BaseTest {
 			'--database' => 'testbench',
 			'--path' => '../src/migrations',
 		]);
+		$this->assertTrue(0 == $result);
 
+		$result = $this->artisan->call('migrate:rollback');
 		$this->assertTrue(0 == $result);
 	}
 
