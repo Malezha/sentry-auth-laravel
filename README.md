@@ -28,7 +28,7 @@ This package allows you to do exactly that - install Sentry, install this driver
 By [Simon Hampel](http://hampelgroup.com/)
 and [Oleg Isaev](https://github.com/Malezha).
 
-#Versions
+##Versions
 
 | Driver | Laravel | Sentry |
 | :----: | :-----: | :----: |
