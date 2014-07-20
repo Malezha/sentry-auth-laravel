@@ -19,7 +19,7 @@ class AuthTest extends TestCase {
 		
 		$artisan->call('migrate', [
 			'--database' => 'testbench',
-			'--path' => 'migrations',
+			'--path' => '../src/migrations',
 		]);
 	}
 	
@@ -41,23 +41,23 @@ class AuthTest extends TestCase {
             'prefix' => '',
         ));
 
-        $app['config']->set('auth.model', 'Malezha\Sentry\Auth\SentryUser');
+        $app['config']->set('auth.model', '\Malezha\Sentry\Auth\SentryUser');
     }
 	
 	protected function getPackageProviders()
     {
         return array(
-			'Cartalyst\Sentry\SentryServiceProvider',
-			'Malezha\Sentry\Auth\SentryAuthServiceProvider',
-			'Malezha\Sentry\Hashing\SentryHashServiceProvider',
+			'\Cartalyst\Sentry\SentryServiceProvider',
+			'\Malezha\Sentry\Auth\SentryAuthServiceProvider',
+			'\Malezha\Sentry\Hashing\SentryHashServiceProvider',
         );
     }
 	
 	protected function getPackageAliases()
 	{
 		return array(
-			'Sentry' => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
-			'SentryUser' => 'Malezha\Sentry\Auth\SentryUser'
+			'Sentry' => '\Cartalyst\Sentry\Facades\Laravel\Sentry',
+			'SentryUser' => '\Malezha\Sentry\Auth\SentryUser'
 		);
 	}
 	
@@ -73,7 +73,7 @@ class AuthTest extends TestCase {
 		$this->assertTrue(\Auth::attempt($user));
 
         $this->setExpectedException('\Cartalyst\Sentry\Users\UserNotActivatedException');
-        Sentry::authenticate($user, false);
+        \Sentry::authenticate($user, false);
 	}
 
 }
