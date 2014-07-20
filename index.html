@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Sentry Auth Driver for Laravel : Fork based on hampel/sentry-auth-laravel" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Sentry Auth Driver for Laravel</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Malezha/sentry-auth-laravel">View on GitHub</a>
+
+          <h1 id="project_title">Sentry Auth Driver for Laravel</h1>
+          <h2 id="project_tagline">Fork based on hampel/sentry-auth-laravel</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/Malezha/sentry-auth-laravel/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/Malezha/sentry-auth-laravel/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p>Allows you to use built-in Laravel Auth routines with Cartalyst Sentry.</p>
+
+<p>Laravel's built-in Auth routines allow you to configure an authentication driver for your application, which includes functionality such
+as sending out password reset emails.</p>
+
+<p>While Cartalyst's Sentry provides the same functionality, it does so in a different and non-compatible manner, so you need to rewrite all
+Auth routines to use Sentry's API - you can't just change the Auth driver in Laravel.</p>
+
+<p>This package allows you to do exactly that - install Sentry, install this driver and you can then configure the built-in Auth driver to use
+"sentry" for authentication. You'll still need to extend the functionality to implement Sentry's advanced features such as groups, permissions,
+ login throttling and such - but at least you don't need to completely rewrite your default Auth provider.</p>
+
+<p>Ideally, Cartalyst would provide this wrapper functionality as part of their own Sentry package, but until then, hopefully this package will
+ be useful to some people.</p>
+
+<p>By <a href="http://hampelgroup.com/">Simon Hampel</a>
+and <a href="https://github.com/Malezha">Oleg Isaev</a>.</p>
+
+<h2>
+<a name="versions" class="anchor" href="#versions"><span class="octicon octicon-link"></span></a>Versions</h2>
+
+<table>
+<thead><tr>
+<th align="center">Driver</th>
+<th align="center">Laravel</th>
+<th align="center">Sentry</th>
+</tr></thead>
+<tbody>
+<tr>
+<td align="center">1.0.*</td>
+<td align="center">4.0.*</td>
+<td align="center">2.0.*</td>
+</tr>
+<tr>
+<td align="center">1.1.*</td>
+<td align="center">4.1.*</td>
+<td align="center">2.0.*</td>
+</tr>
+<tr>
+<td align="center">1.2.*</td>
+<td align="center">4.2.*</td>
+<td align="center">2.1.*</td>
+</tr>
+</tbody>
+</table><h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>The recommended way of installing is through <a href="http://getcomposer.org">Composer</a>:</p>
+
+<p>Require the packages via Composer in your <code>composer.json</code></p>
+
+<div class="highlight highlight-json"><pre><span class="s2">"cartalyst/sentry"</span><span class="err">:</span> <span class="s2">"2.1.*"</span><span class="err">,</span>
+<span class="s2">"malezha/sentry-auth-laravel"</span><span class="err">:</span> <span class="s2">"1.2.*"</span>
+</pre></div>
+
+<p>Run Composer to update the new requirement.</p>
+
+<pre lang="shell"><code>composer update
+</code></pre>
+
+<p>Open your Laravel config file <code>app/config/app.php</code> and add the two service providers to the providers array:</p>
+
+<div class="highlight highlight-php"><pre><span class="s1">'providers'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="o">...</span>
+    <span class="s1">'Cartalyst\Sentry\SentryServiceProvider'</span><span class="p">,</span>
+    <span class="s1">'Malezha\Sentry\Auth\SentryAuthServiceProvider'</span><span class="p">,</span>
+    <span class="s1">'Malezha\Sentry\Hashing\SentryHashServiceProvider'</span><span class="p">,</span>
+
+<span class="p">),</span>
+</pre></div>
+
+<p>The SentryAuthServiceProvider is where the Auth service is extended with a new "sentry" user provider.</p>
+
+<p>The SentryHashServiceProvider provides a new service "sentry-hash" which provides a simple wrapper for the Sentry hashing routines.</p>
+
+<p>The package also supplies an Eloquent-based User model called SentryUser, which extends the default Eloquent user model provided by Sentry and
+ implements several required interfaces which are missing from the default Sentry model.</p>
+
+<p>Make sure you've added the Sentry class alias to <code>app/config/app.php</code>:</p>
+
+<div class="highlight highlight-php"><pre><span class="s1">'aliases'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="o">...</span>
+    <span class="s1">'Sentry'</span>            <span class="o">=&gt;</span> <span class="s1">'Cartalyst\Sentry\Facades\Laravel\Sentry'</span>
+<span class="p">),</span>
+</pre></div>
+
+<p>Run packages migrations:</p>
+
+<pre lang="shell"><code>php artisan migrate --package=cartalyst/sentry
+php artisan migrate --package=malezha/sentry-auth-laravel
+</code></pre>
+
+<p>If you haven't already done so, publish your Sentry config files:</p>
+
+<pre lang="shell"><code>php artisan config:publish cartalyst/sentry
+</code></pre>
+
+<p>... you should find the config files in <code>app/config/packages/cartalyst/sentry</code></p>
+
+<p>Open your Laravel config file <code>app/config/auth.php</code> and set the driver to <code>sentry</code>:</p>
+
+<div class="highlight highlight-php"><pre><span class="s1">'driver'</span> <span class="o">=&gt;</span> <span class="s1">'sentry'</span><span class="p">,</span>
+</pre></div>
+
+<p>It doesn't matter which hasher you choose to use fro Sentry, our driver will simply use the same hasher in place of the built in hasher from
+Laravel.</p>
+
+<p>Our <code>SentryUser</code> model extends Sentry's User model, but also implements some of the additional interfaces required by the Laravel Auth libraries.
+If you have extended our SentryUser model, you should specify the name of your own model in both the Laravel <code>auth.php</code> config file and in the
+ Sentry <code>config.php</code> file.</p>
+
+<p>For example, create a new model in <code>app/models/User.php</code>:</p>
+
+<div class="highlight highlight-php"><pre><span class="k">use</span> <span class="nx">Malezha\Sentry\Auth\SentryUser</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">SentryUser</span>
+<span class="p">{</span>
+
+    <span class="c1">// add custom functions, change default database connection, etc</span>
+
+<span class="p">}</span>
+</pre></div>
+
+<p>You would then change <code>app/config/auth.php</code>, set the model to <code>User</code>:</p>
+
+<div class="highlight highlight-php"><pre><span class="s1">'model'</span> <span class="o">=&gt;</span> <span class="s1">'User'</span><span class="p">,</span>
+</pre></div>
+
+<p>Also change <code>app/config/packages/cartalyst/sentry/config.php</code> to also set the user model to <code>User</code>:</p>
+
+<div class="highlight highlight-php"><pre><span class="s1">'users'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'model'</span> <span class="o">=&gt;</span> <span class="s1">'User'</span><span class="p">,</span>
+<span class="p">),</span>
+</pre></div>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Implement user authentication for your Laravel application as normal, following the instructions in <a href="http://laravel.com/docs/security">http://laravel.com/docs/security</a>.</p>
+
+<p>Either use the <code>SentryUser</code> model provided to replace the user model provided by Sentry, or implement your own model
+extending the model we have supplied.</p>
+
+<p>Given that the field used as the username in Sentry can be configured, when sending user data to <code>Auth::attempt</code>, you should use the
+configured value rather than hard-coding the value in your code. There are two ways of retrieving this value:</p>
+
+<div class="highlight highlight-php"><pre><span class="nv">$loginfield</span> <span class="o">=</span> <span class="nx">\Malezha\Sentry\Auth\SentryUser</span><span class="o">::</span><span class="na">getLoginAttributeName</span><span class="p">();</span>
+</pre></div>
+
+<p>Or you can just check the config value directly (just make sure you're not changing the login attribute name yourself dynamically at runtime!):</p>
+
+<div class="highlight highlight-php"><pre><span class="nv">$loginfield</span> <span class="o">=</span> <span class="nx">Config</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">'cartalyst/sentry::users.login_attribute'</span><span class="p">);</span>
+</pre></div>
+
+<p>You can then use this in your controller (or elsewhere) for validation and authentication:</p>
+
+<div class="highlight highlight-php"><pre><span class="nv">$loginfield</span> <span class="o">=</span> <span class="nx">\Malezha\Sentry\Auth\SentryUser</span><span class="o">::</span><span class="na">getLoginAttributeName</span><span class="p">();</span>
+<span class="nv">$passwordfield</span> <span class="o">=</span> <span class="s1">'password'</span><span class="p">;</span>
+
+<span class="nv">$credentials</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="nv">$loginfield</span> <span class="o">=&gt;</span> <span class="nx">Input</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">'email'</span><span class="p">),</span>
+    <span class="nv">$passwordfield</span> <span class="o">=&gt;</span> <span class="nx">Input</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">'password'</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">Auth</span><span class="o">::</span><span class="na">attempt</span><span class="p">(</span><span class="nv">$credentials</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="c1">// successfully logged in</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="c1">// authentication failed</span>
+<span class="p">}</span>
+</pre></div>
+
+<h3>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h3>
+
+<p>The package is open-sourced software licensed under the <a href="https://github.com/Malezha/sentry-auth-laravel/blob/master/LICENSE.md">MIT license</a>    </p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Sentry Auth Driver for Laravel maintained by <a href="https://github.com/Malezha">Malezha</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
