@@ -176,4 +176,4 @@ else
 
 ### License
 
-The package is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)	
+The package is open-sourced software licensed under the [MIT license](https://github.com/Malezha/sentry-auth-laravel/blob/master/LICENSE.md)	
