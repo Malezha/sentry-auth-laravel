@@ -16,9 +16,6 @@ class AuthTest extends BaseTest {
 		$user = $this->getData()['user'];
 
 		$this->assertTrue(\Auth::attempt($user));
-
-		$this->setExpectedException('\Cartalyst\Sentry\Users\UserNotActivatedException');
-		\Sentry::authenticate($user, false);
 	}
 
 	public function testLogout()

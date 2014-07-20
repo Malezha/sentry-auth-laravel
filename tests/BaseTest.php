@@ -34,6 +34,7 @@ class BaseTest extends TestCase {
 		\DB::table('users')->insert(array(
 			'email' => $user['email'],
 			'password' => Hash::make($user['password']),
+			'activated' => 1,
 			'created_at' => $now,
 			'updated_at' => $now,
 		));

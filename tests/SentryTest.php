@@ -9,17 +9,9 @@ class SentryTest extends BaseTest {
 	public function setUp() 
 	{
 		parent::setUp();
+		
+		$this->populateDatabase();
 
-		$user = $this->getData()['user'];
-
-		$now = Carbon::now();
-		\DB::table('users')->insert(array(
-			'email' => $user['email'],
-			'password' => Hash::make($user['password']),
-            'activated' => 1,
-			'created_at' => $now,
-			'updated_at' => $now,
-		));
 	}
 
 	public function testSentry()
