@@ -1,6 +1,5 @@
 <?php namespace Malezha\Sentry\Auth;
 
-use Config;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Auth\Guard;
 use Illuminate\Auth\EloquentUserProvider;
@@ -22,8 +21,6 @@ class SentryAuthServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('malezha/sentry-auth-laravel', 'sentry-auth-laravel', __DIR__ . '/../../..');
-
-		$app = $this->app;
 
 		$this->app['auth']->extend('sentry', function($app)
 		{

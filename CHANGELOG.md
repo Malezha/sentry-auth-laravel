@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+1.2.2 (2014-07-20)
+------------------
+* scrutinizer-ci fixes
+
 1.2.1 (2014-07-20)
 ------------------
 * phpunit
@@ -14,21 +18,18 @@ CHANGELOG
 
 1.1.1 (2013-12-14)
 ------------------
-
 * removed orchestral/testbench from require-dev and removed ServiceProviderTest which used it due to a conflict in
   required classes
 * fixed some issues with the service providers
 
 1.1.0 (2013-12-13)
 ------------------
-
 * updated framework requirement to 4.1.*
 
 1.0.1 (2013-10-08)
-
+------------------
 * fixed bug in passing session to Guard
 
 1.0.0 (2013-10-03)
 ------------------
-
 * initial release
