@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/Malezha/sentry-auth-laravel.svg)](https://travis-ci.org/Malezha/sentry-auth-laravel)
 [![Dependency Status](https://www.versioneye.com/user/projects/53caccb96d70ce032e000002/badge.svg)](https://www.versioneye.com/user/projects/53caccb96d70ce032e000002)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Malezha/sentry-auth-laravel/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Malezha/sentry-auth-laravel/?branch=master)
+[![Coverage Status](https://img.shields.io/coveralls/Malezha/sentry-auth-laravel.svg)](https://coveralls.io/r/Malezha/sentry-auth-laravel?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/malezha/sentry-auth-laravel/v/stable.svg)](https://packagist.org/packages/malezha/sentry-auth-laravel) 
 [![License](https://poser.pugx.org/malezha/sentry-auth-laravel/license.svg)](https://packagist.org/packages/malezha/sentry-auth-laravel)
 
@@ -38,21 +39,17 @@ and [Oleg Isaev](https://github.com/Malezha).
 
 The recommended way of installing is through [Composer](http://getcomposer.org):
 
-Require the package via Composer in your `composer.json`
+Require the packages via Composer in your `composer.json`
 
 ```json
-"require": {
-	"cartalyst/sentry": "2.1.*",
-	"malezha/sentry-auth-laravel": "1.2.*"
-}
+"cartalyst/sentry": "2.1.*",
+"malezha/sentry-auth-laravel": "1.2.*"
 ```
 
 Run Composer to update the new requirement.
 
 ```shell
-$ composer update
-$ php artisan migrate --package=cartalyst/sentry
-$ php artisan migrate --package=malezha/sentry-auth-laravel
+composer update
 ```
 
 Open your Laravel config file `app/config/app.php` and add the two service providers to the providers array:
@@ -79,14 +76,21 @@ Make sure you've added the Sentry class alias to `app/config/app.php`:
 ```php
 'aliases' => array(
 	...
-	'Sentry' 		  => 'Cartalyst\Sentry\Facades\Laravel\Sentry'
+	'Sentry'            => 'Cartalyst\Sentry\Facades\Laravel\Sentry'
 ),
+```
+
+Run packages migrations:
+
+```shell
+php artisan migrate --package=cartalyst/sentry
+php artisan migrate --package=malezha/sentry-auth-laravel
 ```
 
 If you haven't already done so, publish your Sentry config files:
 
 ```shell
-$ php artisan config:publish cartalyst/sentry
+php artisan config:publish cartalyst/sentry
 ```
 
 ... you should find the config files in `app/config/packages/cartalyst/sentry`
@@ -100,7 +104,7 @@ Open your Laravel config file `app/config/auth.php` and set the driver to `sentr
 It doesn't matter which hasher you choose to use fro Sentry, our driver will simply use the same hasher in place of the built in hasher from
 Laravel.
 
-Our SentryUser model extends Sentry's User model, but also implements some of the additional interfaces required by the Laravel Auth libraries.
+Our `SentryUser` model extends Sentry's User model, but also implements some of the additional interfaces required by the Laravel Auth libraries.
 If you have extended our SentryUser model, you should specify the name of your own model in both the Laravel `auth.php` config file and in the
  Sentry `config.php` file.
 
