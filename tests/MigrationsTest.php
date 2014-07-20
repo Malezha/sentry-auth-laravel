@@ -1,14 +1,15 @@
 <?php
 
-use Orchestra\Testbench\TestCase;
+require_once 'BaseTest.php';
 
-class MigrationsTest extends TestCase {
+class MigrationsTest extends BaseTest {
 
 	protected $artisan;
 
 	public function setUp() 
 	{
-		parent::setUp();
+
+        parent::setUp();
 
 		$artisan = $this->app->make('artisan');
 		$this->artisan = $artisan;
@@ -17,25 +18,6 @@ class MigrationsTest extends TestCase {
 			'--database' => 'testbench',
 			'--path' => '../vendor/cartalyst/sentry/src/migrations',
 		]);
-	}
-
-	/**
-	* Define environment setup.
-	*
-	* @param Illuminate\Foundation\Application $app
-	* @return void
-	*/
-	protected function getEnvironmentSetUp($app)
-	{
-		// reset base path to point to our package's src directory
-		$app['path.base'] = __DIR__ . '/../src';
-
-		$app['config']->set('database.default', 'testbench');
-		$app['config']->set('database.connections.testbench', array(
-			'driver' => 'sqlite',
-			'database' => ':memory:',
-			'prefix' => '',
-		));
 	}
 
 	public function testMigrate()
