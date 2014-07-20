@@ -14,7 +14,7 @@ class MigrationMalezhaSentryAuthLaravelAddRememberToken extends Migration {
 	{
 		Schema::table('users', function(Blueprint $table)
 		{
-            $table->string('remember_token', 100)->nullable()->after('reset_password_code');
+			$table->string('remember_token', 100)->nullable()->after('reset_password_code');
 		});
 	}
 

@@ -109,7 +109,7 @@ class User extends SentryUser
 {
 
 	// add custom functions, change default database connection, etc
-	
+
 }
 ```
 
