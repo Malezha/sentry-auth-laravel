@@ -1,7 +1,7 @@
 {
     "name": "malezha/sentry-auth-laravel",
     "description": "Sentry Auth Driver for Laravel",
-	"homepage" : "http://github.com/Malezha/sentry-auth-laravel",
+	"homepage" : "http://malezha.github.io/sentry-auth-laravel/",
 	"authors": [{
 		"name": "Simon Hampel",
 		"email": "simon@hampelgroup.com",
@@ -31,7 +31,7 @@
     "require": {
         "php": ">=5.4.0",
         "illuminate/support": "4.2.*",
-		"cartalyst/sentry": ">=2.0"
+		"cartalyst/sentry": "2.1.*"
     },
 	"require-dev" : {
 		"phpunit/phpunit": "4.1.*",
@@ -44,5 +44,5 @@
             "Malezha\\Sentry": "src/"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
