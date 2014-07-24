@@ -1,7 +1,7 @@
 ##Sentry Auth Driver for Laravel
 
 [![Build Status](https://travis-ci.org/Malezha/sentry-auth-laravel.svg)](https://travis-ci.org/Malezha/sentry-auth-laravel)
-[![Dependency Status](https://www.versioneye.com/user/projects/53caccb96d70ce032e000002/badge.svg)](https://www.versioneye.com/user/projects/53caccb96d70ce032e000002)
+[![Dependency Status](https://gemnasium.com/Malezha/sentry-auth-laravel.svg)](https://gemnasium.com/Malezha/sentry-auth-laravel)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Malezha/sentry-auth-laravel/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Malezha/sentry-auth-laravel/?branch=master)
 [![Coverage Status](https://img.shields.io/coveralls/Malezha/sentry-auth-laravel.svg)](https://coveralls.io/r/Malezha/sentry-auth-laravel?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/malezha/sentry-auth-laravel/v/stable.svg)](https://packagist.org/packages/malezha/sentry-auth-laravel) 
