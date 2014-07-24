@@ -82,8 +82,8 @@ and <a href="https://github.com/Malezha">Oleg Isaev</a>.</p>
 
 <p>Require the packages via Composer in your <code>composer.json</code></p>
 
-<div class="highlight highlight-json"><pre><span class="s2">"cartalyst/sentry"</span><span class="err">:</span> <span class="s2">"2.1.*"</span><span class="err">,</span>
-<span class="s2">"malezha/sentry-auth-laravel"</span><span class="err">:</span> <span class="s2">"1.2.*"</span>
+<div class="highlight highlight-json"><pre><span class="s2">"cartalyst/sentry"</span><span class="p">:</span> <span class="s2">"2.1.*"</span><span class="p">,</span>
+<span class="s2">"malezha/sentry-auth-laravel"</span><span class="p">:</span> <span class="s2">"1.2.*"</span>
 </pre></div>
 
 <p>Run Composer to update the new requirement.</p>
@@ -149,7 +149,18 @@ If you have extended our SentryUser model, you should specify the name of your o
 <span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">SentryUser</span>
 <span class="p">{</span>
 
-    <span class="c1">// add custom functions, change default database connection, etc</span>
+    <span class="c1">/**</span>
+    <span class="c1">* The attributes excluded from the model's JSON form.</span>
+    <span class="c1">*</span>
+    <span class="c1">* @var array</span>
+    <span class="c1">*/</span>
+    <span class="k">protected</span> <span class="nv">$hidden</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'password'</span><span class="p">,</span>
+        <span class="s1">'reset_password_code'</span><span class="p">,</span>
+        <span class="s1">'activation_code'</span><span class="p">,</span>
+        <span class="s1">'persist_code'</span><span class="p">,</span>
+        <span class="s1">'remember_token'</span><span class="p">,</span>
+    <span class="p">);</span>
 
 <span class="p">}</span>
 </pre></div>
