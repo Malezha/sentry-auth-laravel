@@ -116,7 +116,18 @@ use Malezha\Sentry\Auth\SentryUser;
 class User extends SentryUser
 {
 
-	// add custom functions, change default database connection, etc
+	/**
+	* The attributes excluded from the model's JSON form.
+	*
+	* @var array
+	*/
+	protected $hidden = array(
+		'password',
+		'reset_password_code',
+		'activation_code',
+		'persist_code',
+		'remember_token',
+	);
 
 }
 ```
