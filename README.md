@@ -3,10 +3,12 @@
 [![Build Status](https://travis-ci.org/Malezha/sentry-auth-laravel.svg)](https://travis-ci.org/Malezha/sentry-auth-laravel)
 [![Dependency Status](https://gemnasium.com/Malezha/sentry-auth-laravel.svg)](https://gemnasium.com/Malezha/sentry-auth-laravel)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Malezha/sentry-auth-laravel/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Malezha/sentry-auth-laravel/?branch=master)
-[![Coverage Status](https://img.shields.io/coveralls/Malezha/sentry-auth-laravel.svg)](https://coveralls.io/r/Malezha/sentry-auth-laravel?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/Malezha/sentry-auth-laravel/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Malezha/sentry-auth-laravel/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/malezha/sentry-auth-laravel/v/stable.svg)](https://packagist.org/packages/malezha/sentry-auth-laravel) 
 [![License](https://poser.pugx.org/malezha/sentry-auth-laravel/license.svg)](https://packagist.org/packages/malezha/sentry-auth-laravel)
 
+
+Fork based on [hampel/sentry-auth-laravel](https://bitbucket.org/hampel/sentry-auth-driver-for-laravel).
 
 Allows you to use built-in Laravel Auth routines with Cartalyst Sentry.
 

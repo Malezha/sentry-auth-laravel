@@ -2,4 +2,6 @@
 /vendor
 composer.phar
 composer.lock
+coverage.clover
+ocular.phar
 .DS_Store
