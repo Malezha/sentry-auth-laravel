@@ -2,9 +2,11 @@ CHANGELOG
 =========
 
 1.2.5 (2014-07-24)
+------------------
 * deleted hidden in SentryUser model
 
 1.2.4 (2014-07-24)
+------------------
 * updated requirement
 
 1.2.3 (2014-07-20)
