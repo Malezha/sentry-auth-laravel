@@ -2,8 +2,6 @@
 
 require_once 'BaseTest.php';
 
-use Carbon\Carbon;
-
 class SentryTest extends BaseTest {
 
 	public function setUp() 
@@ -11,7 +9,7 @@ class SentryTest extends BaseTest {
 		parent::setUp();
 	}
 
-	public function testSentry()
+	public function testSentryPackage()
 	{
 		$credentials = $this->getData()['user'];
 

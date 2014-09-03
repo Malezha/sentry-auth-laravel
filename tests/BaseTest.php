@@ -80,18 +80,25 @@ class BaseTest extends TestCase {
 	protected function getPackageProviders()
 	{
 		return array(
-			'\Cartalyst\Sentry\SentryServiceProvider',
-			'\Malezha\Sentry\Auth\SentryAuthServiceProvider',
-			'\Malezha\Sentry\Hashing\SentryHashServiceProvider',
+			'Cartalyst\Sentry\SentryServiceProvider',
+			'Malezha\Sentry\Auth\SentryAuthServiceProvider',
+			'Malezha\Sentry\Hashing\SentryHashServiceProvider',
 		);
 	}
 
 	protected function getPackageAliases()
 	{
 		return array(
-			'Sentry' => '\Cartalyst\Sentry\Facades\Laravel\Sentry',
-			'SentryUser' => '\Malezha\Sentry\Auth\SentryUser'
+			'Sentry' => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+			'SentryUser' => 'Malezha\Sentry\Auth\SentryUser'
 		);
 	}
+
+    public function testEnvironmentSet()
+    {
+        $this->assertArrayHasKey('Cartalyst\Sentry\SentryServiceProvider', $this->app->getLoadedProviders());
+        $this->assertArrayHasKey('Malezha\Sentry\Auth\SentryAuthServiceProvider', $this->app->getLoadedProviders());
+        $this->assertArrayHasKey('Malezha\Sentry\Hashing\SentryHashServiceProvider', $this->app->getLoadedProviders());
+    }
 
 }
