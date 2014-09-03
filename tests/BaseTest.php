@@ -73,7 +73,7 @@ class BaseTest extends TestCase {
 			'prefix' => '',
 		));
 
-        $app['config']->set('auth.driver', 'sentry');
+		$app['config']->set('auth.driver', 'sentry');
 		$app['config']->set('auth.model', '\Malezha\Sentry\Auth\SentryUser');
 	}
 
@@ -94,11 +94,13 @@ class BaseTest extends TestCase {
 		);
 	}
 
-    public function testEnvironmentSet()
-    {
-        $this->assertArrayHasKey('Cartalyst\Sentry\SentryServiceProvider', $this->app->getLoadedProviders());
-        $this->assertArrayHasKey('Malezha\Sentry\Auth\SentryAuthServiceProvider', $this->app->getLoadedProviders());
-        $this->assertArrayHasKey('Malezha\Sentry\Hashing\SentryHashServiceProvider', $this->app->getLoadedProviders());
-    }
+	public function testEnvironmentSet()
+	{
+		$loadedProvireds = $this->app->getLoadedProviders()
+
+		$this->assertArrayHasKey('Cartalyst\Sentry\SentryServiceProvider', $loadedProvireds);
+		$this->assertArrayHasKey('Malezha\Sentry\Auth\SentryAuthServiceProvider', $loadedProvireds);
+		$this->assertArrayHasKey('Malezha\Sentry\Hashing\SentryHashServiceProvider', $loadedProvireds);
+	}
 
 }

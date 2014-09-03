@@ -9,7 +9,7 @@ class MigrationsTest extends BaseTest {
 	public function setUp() 
 	{
 
-        parent::setUp();
+		parent::setUp();
 
 		$artisan = $this->app->make('artisan');
 		$this->artisan = $artisan;
