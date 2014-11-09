@@ -96,11 +96,11 @@ class BaseTest extends TestCase {
 
 	public function testEnvironmentSet()
 	{
-		$loadedProvireds = $this->app->getLoadedProviders();
+		$loadedProviders = $this->app->getLoadedProviders();
 
-		$this->assertArrayHasKey('Cartalyst\Sentry\SentryServiceProvider', $loadedProvireds);
-		$this->assertArrayHasKey('Malezha\Sentry\Auth\SentryAuthServiceProvider', $loadedProvireds);
-		$this->assertArrayHasKey('Malezha\Sentry\Hashing\SentryHashServiceProvider', $loadedProvireds);
+		$this->assertArrayHasKey('Cartalyst\Sentry\SentryServiceProvider', $loadedProviders);
+		$this->assertArrayHasKey('Malezha\Sentry\Auth\SentryAuthServiceProvider', $loadedProviders);
+		$this->assertArrayHasKey('Malezha\Sentry\Hashing\SentryHashServiceProvider', $loadedProviders);
 	}
 
 }

@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+1.2.6 (2014-11-09)
+------------------
+* swich coveralls to scrutinizer
+* fix tests
+
 1.2.5 (2014-07-24)
 ------------------
 * deleted hidden in SentryUser model
