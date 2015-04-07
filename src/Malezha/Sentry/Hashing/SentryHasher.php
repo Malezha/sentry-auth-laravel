@@ -1,9 +1,9 @@
 <?php namespace Malezha\Sentry\Hashing;
 
-use Illuminate\Hashing\HasherInterface;
+use Illuminate\Contracts\Hashing\Hasher;
 use Cartalyst\Sentry\Hashing\HasherInterface as SentryHasherInterface;
 
-class SentryHasher implements HasherInterface {
+class SentryHasher implements Hasher {
 
 	protected $hasher;
 
