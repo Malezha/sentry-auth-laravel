@@ -38,6 +38,12 @@
         "orchestra/testbench": "~3.0",
         "doctrine/dbal": "~2.5"
 	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/BootstrapCMS/sentry"
+		}
+	],
     "autoload": {
         "psr-0": {
             "Malezha\\Sentry": "src/"
