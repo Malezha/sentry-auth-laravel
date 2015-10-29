@@ -1,4 +1,4 @@
-##Sentry Auth Driver for Laravel
+## Sentry Auth Driver for Laravel
 
 [![Build Status](https://travis-ci.org/Malezha/sentry-auth-laravel.svg)](https://travis-ci.org/Malezha/sentry-auth-laravel)
 [![Dependency Status](https://gemnasium.com/Malezha/sentry-auth-laravel.svg)](https://gemnasium.com/Malezha/sentry-auth-laravel)
@@ -7,6 +7,7 @@
 [![Latest Stable Version](https://poser.pugx.org/malezha/sentry-auth-laravel/v/stable.svg)](https://packagist.org/packages/malezha/sentry-auth-laravel) 
 [![License](https://poser.pugx.org/malezha/sentry-auth-laravel/license.svg)](https://packagist.org/packages/malezha/sentry-auth-laravel)
 
+>Package is no longer supported.
 
 Fork based on [hampel/sentry-auth-laravel](https://bitbucket.org/hampel/sentry-auth-driver-for-laravel).
 
@@ -28,7 +29,7 @@ This package allows you to do exactly that - install Sentry, install this driver
 By [Simon Hampel](http://hampelgroup.com/)
 and [Oleg Isaev](https://github.com/Malezha).
 
-##Versions
+## Versions
 
 | Driver | Laravel | Sentry |
 | :----: | :-----: | :----: |
@@ -37,7 +38,7 @@ and [Oleg Isaev](https://github.com/Malezha).
 | 1.2.*  | 4.2.*   | 2.1.*  |
 
 
-##Installation
+## Installation
 
 The recommended way of installing is through [Composer](http://getcomposer.org):
 
@@ -149,7 +150,7 @@ Also change `app/config/packages/cartalyst/sentry/config.php` to also set the us
 ```
 
 
-##Usage
+## Usage
 
 Implement user authentication for your Laravel application as normal, following the instructions in [http://laravel.com/docs/security](http://laravel.com/docs/security).
 
