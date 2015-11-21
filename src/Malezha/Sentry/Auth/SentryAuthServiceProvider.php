@@ -20,8 +20,6 @@ class SentryAuthServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('malezha/sentry-auth-laravel', 'sentry-auth-laravel', __DIR__ . '/../../..');
-
 		$this->app['auth']->extend('sentry', function($app)
 		{
 			$provider = new EloquentUserProvider($app['sentry-hash'], $app['config']->get('auth.model'));
